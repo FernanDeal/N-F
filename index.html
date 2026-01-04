@@ -33,7 +33,6 @@
             line-height: 1.8;
         }
 
-        /* Header - MÁS TRANSPARENTE CON BLUR */
         header {
             position: fixed;
             top: 0;
@@ -106,7 +105,6 @@
             color: var(--accent);
         }
 
-        /* Sections - ESPACIO AUMENTADO A 30PX */
         .section {
             display: flex;
             align-items: center;
@@ -122,7 +120,6 @@
             transform: translateY(0);
         }
 
-        /* Hero Section - SOLO ESTA TIENE MIN-HEIGHT */
         .hero {
             min-height: 100vh;
             background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80');
@@ -204,7 +201,6 @@
             font-weight: 400;
         }
 
-        /* Section Headers */
         .section-header {
             text-align: center;
             margin-bottom: 40px;
@@ -225,7 +221,6 @@
             font-weight: 400;
         }
 
-        /* Momentos Section */
         .momentos {
             background-color: var(--background);
             flex-direction: column;
@@ -262,7 +257,6 @@
             transform: scale(1.05);
         }
 
-        /* El Gran Día Section */
         .el-gran-dia {
             background-color: var(--background);
             flex-direction: column;
@@ -334,7 +328,6 @@
             border-bottom-color: var(--accent);
         }
 
-        /* Confirmar Section */
         .confirmar {
             background-color: var(--background);
             flex-direction: column;
@@ -401,7 +394,6 @@
             line-height: 1.6;
         }
 
-        /* Formulario en dos columnas */
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -492,7 +484,6 @@
             border-bottom-color: var(--accent);
         }
 
-        /* Desplegable de autobús que aparece dinámicamente */
         .bus-options {
             display: none;
             margin-top: 25px;
@@ -597,7 +588,6 @@
             font-style: italic;
         }
 
-        /* Footer */
         footer {
             background-color: var(--background);
             padding: 30px 60px;
@@ -612,93 +602,18 @@
             font-weight: 400;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .hero-content {
-                padding: 40px 55px;
-            }
-
-            .event-details {
-                gap: 55px;
-            }
-
-            .gallery-grid {
-                max-width: 1200px;
-            }
-        }
-
         @media (max-width: 768px) {
-            nav {
-                padding: 0 30px;
-            }
-
-            .nav-links {
-                gap: 25px;
-            }
-
-            .nav-links a {
-                font-size: 10px;
-            }
-
-            .hero h1 {
-                font-size: 38px;
-            }
-
-            .hero-content {
-                padding: 35px 30px;
-            }
-
-            .countdown-number {
-                font-size: 40px;
-            }
-
             .section {
                 padding: 30px 30px;
             }
-
-            .momentos {
-                padding: 40px 30px;
-            }
-
-            .el-gran-dia {
-                padding: 40px 30px;
-            }
-
-            .confirmar {
-                padding: 40px 30px;
-            }
-
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
             }
-
             .event-details {
                 grid-template-columns: 1fr;
-                gap: 45px;
             }
-
-            .form-container {
-                padding: 0 20px;
-            }
-
             .form-row {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .radio-group {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-
-            footer {
-                padding: 25px 30px;
             }
         }
     </style>
@@ -716,62 +631,43 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section id="hero" class="section hero visible">
             <div class="hero-content">
                 <h1>Nuria &<br>Fernando</h1>
                 <p class="date">24 de Abril, 2026</p>
-
                 <div class="countdown">
                     <span class="countdown-number" id="days">110</span>
                     <span class="countdown-label">Días</span>
                 </div>
-
                 <p class="hero-text">Un encuentro casual, una conversación que duró horas, y un amor para toda la vida. Nos encantaría que nos acompañarais en el día que sellaremos nuestra historia.</p>
             </div>
         </section>
 
-        <!-- Momentos Section -->
         <section id="momentos" class="section momentos">
             <div style="width: 100%;">
                 <div class="section-header">
                     <h2 class="section-title">Momentos</h2>
                     <p class="section-subtitle">Un pequeño vistazo a nuestra historia.</p>
                 </div>
-
                 <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=1200" alt="Aurora Boreal">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200" alt="Paisaje árido">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200" alt="Castillo">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200" alt="Ola">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200" alt="Montañas">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=1200" alt="Río">
-                    </div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=1200" alt="Aurora Boreal"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200" alt="Paisaje árido"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200" alt="Castillo"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200" alt="Ola"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200" alt="Montañas"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=1200" alt="Río"></div>
                 </div>
             </div>
         </section>
 
-        <!-- El Gran Día Section -->
         <section id="el-gran-dia" class="section el-gran-dia">
             <div>
                 <div class="section-header">
                     <h2 class="section-title">El Gran Día</h2>
                 </div>
-
                 <div class="event-details">
                     <div class="event-card">
-                        <svg class="event-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="event-icon" viewBox="0 0 24 24" fill="none">
                             <path d="M12 2L3 7V12C3 17 7 21 12 22C17 21 21 17 21 12V7L12 2Z" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M12 8V16M8 12H16" stroke-linecap="round"/>
                         </svg>
@@ -781,9 +677,8 @@
                         <p class="event-address">Torres de la Alameda, Madrid</p>
                         <a href="https://maps.app.goo.gl/sDBCwMqbPArkWRpw9?g_st=ipc" target="_blank" class="map-link">Ver Mapa</a>
                     </div>
-
                     <div class="event-card">
-                        <svg class="event-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="event-icon" viewBox="0 0 24 24" fill="none">
                             <path d="M7 8H17M7 12H17M7 16H13M3 3H21V21H3V3Z" stroke-linecap="round" stroke-linejoin="round"/>
                             <circle cx="17" cy="16" r="2" stroke-linecap="round"/>
                         </svg>
@@ -797,29 +692,21 @@
             </div>
         </section>
 
-        <!-- Confirmar Section -->
         <section id="confirmar" class="section confirmar">
             <div class="form-container">
                 <h2 class="form-title">Confirmar</h2>
                 <p class="form-subtitle">Por favor, responded antes del 1 de Marzo, 2026.</p>
 
-                <!-- CAMBIAR ACTION A TU EMAIL -->
-                <form id="rsvpForm" action="https://formsubmit.co/fernan_92@hotmail.com" method="POST">
-                    <!-- Configuración de FormSubmit -->
-                    <input type="hidden" name="_subject" value="Nueva respuesta - Boda Nuria y Fernando">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-
-                    <!-- Step 1: Asistencia PRIMERO -->
+                <form id="rsvpForm">
                     <div class="form-step active" data-step="1">
                         <h3 class="form-question">¿Podréis acompañarnos?</h3>
                         <div class="radio-group">
                             <div class="radio-option">
-                                <input type="radio" id="asistir-si" name="asistencia" value="si" checked>
+                                <input type="radio" id="asistir-si" name="asistencia" value="Sí, asistiré" checked>
                                 <label for="asistir-si">Sí, con mucho gusto</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="asistir-no" name="asistencia" value="no">
+                                <input type="radio" id="asistir-no" name="asistencia" value="No, no puedo asistir">
                                 <label for="asistir-no">Lamentablemente, no</label>
                             </div>
                         </div>
@@ -835,7 +722,6 @@
                         </div>
                     </div>
 
-                    <!-- Step 2A: NO PUEDEN VENIR - Nombres -->
                     <div class="form-step" data-step="2a">
                         <h3 class="form-question">Sentimos que no podáis venir.</h3>
                         <p class="form-message">¿Podríais dejarnos vuestro nombre?</p>
@@ -857,7 +743,6 @@
                         </div>
                     </div>
 
-                    <!-- Step 2B: SÍ PUEDEN VENIR - Nombres y Alergias -->
                     <div class="form-step" data-step="2b">
                         <h3 class="form-question">¿Quiénes vendréis?</h3>
                         <div class="form-row">
@@ -884,33 +769,29 @@
                         </div>
                     </div>
 
-                    <!-- Step 3: Autobús CON DESPLEGABLE -->
                     <div class="form-step" data-step="3">
                         <h3 class="form-question">¿Necesitaréis autobús?</h3>
                         <div class="radio-group">
                             <div class="radio-option">
-                                <input type="radio" id="autobus-si" name="autobus" value="si" onchange="toggleBusOptions(true)">
+                                <input type="radio" id="autobus-si" name="autobus" value="Sí, necesito autobús" onchange="toggleBusOptions(true)">
                                 <label for="autobus-si">Sí, por favor</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="autobus-no" name="autobus" value="no" checked onchange="toggleBusOptions(false)">
+                                <input type="radio" id="autobus-no" name="autobus" value="No necesito autobús" checked onchange="toggleBusOptions(false)">
                                 <label for="autobus-no">No, gracias</label>
                             </div>
                         </div>
-
-                        <!-- Desplegable que aparece cuando seleccionan SÍ -->
                         <div id="busOptions" class="bus-options">
                             <div class="form-group">
                                 <label for="bus-parada">Selecciona tu parada</label>
                                 <select id="bus-parada" name="bus_parada">
                                     <option value="">-- Selecciona una opción --</option>
-                                    <option value="opcion-a">Opción A</option>
-                                    <option value="opcion-b">Opción B</option>
-                                    <option value="opcion-c">Opción C</option>
+                                    <option value="Opción A">Opción A</option>
+                                    <option value="Opción B">Opción B</option>
+                                    <option value="Opción C">Opción C</option>
                                 </select>
                             </div>
                         </div>
-
                         <div class="form-buttons">
                             <button type="button" onclick="prevStep()">Atrás</button>
                             <button type="button" onclick="nextStep()">Siguiente</button>
@@ -923,7 +804,6 @@
                         </div>
                     </div>
 
-                    <!-- Step 4: Canción -->
                     <div class="form-step" data-step="4">
                         <h3 class="form-question">¿Alguna canción que no pueda faltar?</h3>
                         <div class="form-group">
@@ -931,7 +811,7 @@
                         </div>
                         <div class="form-buttons">
                             <button type="button" onclick="prevStep()">Atrás</button>
-                            <button type="submit" class="btn-primary">Enviar ✓</button>
+                            <button type="submit" class="btn-primary" id="submitBtn">Enviar ✓</button>
                         </div>
                         <div class="progress-dots">
                             <div class="progress-dot active"></div>
@@ -941,7 +821,6 @@
                         </div>
                     </div>
 
-                    <!-- Thank You -->
                     <div class="form-step" data-step="5">
                         <div class="thank-you">
                             <h2>¡Gracias!</h2>
@@ -953,7 +832,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <p>N & F © 2026</p>
     </footer>
@@ -962,9 +840,7 @@
         let currentStep = '1';
         let guestCount = 1;
         let noGuestCount = 1;
-        let willAttend = true;
 
-        // Countdown
         function updateCountdown() {
             const weddingDate = new Date('2026-04-24T17:00:00');
             const now = new Date();
@@ -972,11 +848,9 @@
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             document.getElementById('days').textContent = days;
         }
-
         updateCountdown();
         setInterval(updateCountdown, 86400000);
 
-        // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
@@ -986,19 +860,16 @@
             }
         });
 
-        // Smooth scroll
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 target.scrollIntoView({ behavior: 'smooth' });
-
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
             });
         });
 
-        // Intersection Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1011,7 +882,6 @@
             observer.observe(section);
         });
 
-        // Toggle bus options dropdown
         function toggleBusOptions(show) {
             const busOptions = document.getElementById('busOptions');
             if (show) {
@@ -1021,30 +891,25 @@
             }
         }
 
-        // Handle asistencia step
         function handleAsistenciaStep() {
             const asistencia = document.querySelector('input[name="asistencia"]:checked').value;
             document.querySelector('[data-step="1"]').classList.remove('active');
 
-            if (asistencia === 'no') {
-                willAttend = false;
+            if (asistencia.includes('No')) {
                 currentStep = '2a';
                 document.querySelector('[data-step="2a"]').classList.add('active');
             } else {
-                willAttend = true;
                 currentStep = '2b';
                 document.querySelector('[data-step="2b"]').classList.add('active');
             }
         }
 
-        // Back to asistencia
         function backToAsistencia() {
             document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
             currentStep = '1';
             document.querySelector('[data-step="1"]').classList.add('active');
         }
 
-        // Next step
         function nextStep() {
             document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
             if (currentStep === '2b') currentStep = '3';
@@ -1052,7 +917,6 @@
             document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
         }
 
-        // Previous step
         function prevStep() {
             document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
             if (currentStep === '4') currentStep = '3';
@@ -1060,10 +924,9 @@
             document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
         }
 
-        // Add guest (para los que SÍ asisten)
         function addGuest() {
             guestCount++;
-            const guestHTML = `
+            const html = `
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nombre${guestCount}">Nombre y Apellidos</label>
@@ -1075,37 +938,69 @@
                     </div>
                 </div>
             `;
-            document.getElementById('additionalGuests').insertAdjacentHTML('beforeend', guestHTML);
+            document.getElementById('additionalGuests').insertAdjacentHTML('beforeend', html);
         }
 
-        // Add no guest (para los que NO asisten)
         function addNoGuest() {
             noGuestCount++;
-            const guestHTML = `
+            const html = `
                 <div class="form-group">
                     <label for="nombre_no_asiste${noGuestCount}">Nombre y Apellidos</label>
                     <input type="text" id="nombre_no_asiste${noGuestCount}" name="nombre_no_asiste${noGuestCount}" placeholder="Nombre y apellidos">
                 </div>
             `;
-            document.getElementById('additionalNoGuests').insertAdjacentHTML('beforeend', guestHTML);
+            document.getElementById('additionalNoGuests').insertAdjacentHTML('beforeend', html);
         }
 
-        // Update active nav link on scroll
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('.section[id]');
-            let current = '';
+        // MANEJO DEL FORMULARIO
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
+            console.log('🚀 Formulario enviado - Iniciando proceso...');
+
+            const submitBtn = document.getElementById('submitBtn') || e.submitter;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Enviando...';
+            }
+
+            const formData = new FormData(this);
+            const data = {};
+
+            for (let [key, value] of formData.entries()) {
+                if (value && value.trim() !== '') {
+                    data[key] = value;
+                    console.log(`${key}: ${value}`);
                 }
-            });
+            }
 
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
+            console.log('📦 Datos a enviar:', data);
+            console.log('🌐 Enviando a FormSubmit...');
+
+            fetch('https://formsubmit.co/ajax/fernan_92@hotmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                console.log('📡 Respuesta recibida:', response.status);
+                return response.json();
+            })
+            .then(result => {
+                console.log('✅ Éxito:', result);
+                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                currentStep = '5';
+                document.querySelector('[data-step="5"]').classList.add('active');
+            })
+            .catch(error => {
+                console.error('❌ Error:', error);
+                alert('Hubo un problema al enviar. Revisa la consola (F12) o contacta directamente.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Enviar ✓';
                 }
             });
         });
