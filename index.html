@@ -639,7 +639,10 @@
                     <span class="countdown-number" id="days">110</span>
                     <span class="countdown-label">Días</span>
                 </div>
-                <p class="hero-text">Un encuentro casual, una conversación que duró horas, y un amor para toda la vida. Nos encantaría que nos acompañarais en el día que sellaremos nuestra historia.</p>
+                <p class="hero-text">
+                    Un encuentro casual, una conversación que duró horas, y un amor para toda la vida.
+                    Nos encantaría que nos acompañarais en el día que sellaremos nuestra historia.
+                </p>
             </div>
         </section>
 
@@ -697,15 +700,13 @@
                 <h2 class="form-title">Confirmar</h2>
                 <p class="form-subtitle">Por favor, responded antes del 1 de Marzo, 2026.</p>
 
-                <!-- IFRAME OCULTO -->
-                <iframe name="hiddenFrame" style="display:none;"></iframe>
-
-                <!-- FORMULARIO NATIVO -->
-                <form id="rsvpForm" action="https://formsubmit.co/fernan_92@hotmail.com" method="POST" target="hiddenFrame">
+                <!-- FORMULARIO NATIVO (sin iframe, redirige a gracias.html) -->
+                <form id="rsvpForm" action="https://formsubmit.co/fernan_92@hotmail.com" method="POST">
 
                     <!-- CONFIGURACIÓN FORMSUBMIT -->
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" value="https://fernandeal.github.io/N-F/gracias.html">
 
                     <div class="form-step active" data-step="1">
                         <h3 class="form-question">¿Podréis acompañarnos?</h3>
@@ -827,13 +828,6 @@
                             <div class="progress-dot active"></div>
                             <div class="progress-dot active"></div>
                             <div class="progress-dot active"></div>
-                        </div>
-                    </div>
-
-                    <div class="form-step" data-step="5">
-                        <div class="thank-you">
-                            <h2>¡Gracias!</h2>
-                            <p>Hemos recibido tu respuesta. ¡Nos vemos en la boda!</p>
                         </div>
                     </div>
                 </form>
@@ -960,22 +954,6 @@
             `;
             document.getElementById('additionalNoGuests').insertAdjacentHTML('beforeend', html);
         }
-
-        // ENVÍO SIMPLIFICADO A IFRAME (SIN AJAX)
-        document.getElementById('rsvpForm').addEventListener('submit', function() {
-            // El formulario se envía nativamente al iframe oculto
-            // Nosotros solo mostramos el mensaje de agradecimiento
-
-            console.log('📨 Enviando formulario al iframe oculto...');
-
-            // Retardo mínimo para asegurar que el submit ocurra
-            setTimeout(() => {
-                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-                currentStep = '5';
-                document.querySelector('[data-step="5"]').classList.add('active');
-                console.log('✅ Vista cambiada a Agradecimiento');
-            }, 200);
-        });
     </script>
 </body>
 </html>
