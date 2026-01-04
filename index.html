@@ -803,12 +803,12 @@
                 <h2 class="form-title">Confirmar</h2>
                 <p class="form-subtitle">Por favor, responded antes del 1 de Marzo, 2026.</p>
 
-                <!-- CAMBIAR ACTION A TU EMAIL -->
-                <form id="rsvpForm" action="https://formsubmit.co/fernan_92@hotmail.com" method="POST">
-                    <!-- Configuración de FormSubmit -->
-                    <input type="hidden" name="_subject" value="Nueva respuesta - Boda Nuria y Fernando">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
+                <form id="rsvpForm">
+                    <!-- Web3Forms Configuration -->
+                    <input type="hidden" name="access_key" value="6c75579f-7ae0-4ce8-b6ef-97e4f643fdb3">
+                    <input type="hidden" name="subject" value="Nueva respuesta - Boda Nuria y Fernando">
+                    <input type="hidden" name="from_name" value="Boda Nuria y Fernando">
+                    <input type="checkbox" name="botcheck" style="display: none;">
 
                     <!-- Step 1: Asistencia PRIMERO -->
                     <div class="form-step active" data-step="1">
@@ -847,7 +847,7 @@
                         <button type="button" class="add-guest" onclick="addNoGuest()">+ Añadir otra persona</button>
                         <div class="form-buttons">
                             <button type="button" onclick="backToAsistencia()">Atrás</button>
-                            <button type="submit" class="btn-primary">Enviar ✓</button>
+                            <button type="button" onclick="submitForm()" class="btn-primary">Enviar ✓</button>
                         </div>
                         <div class="progress-dots">
                             <div class="progress-dot active"></div>
@@ -931,7 +931,7 @@
                         </div>
                         <div class="form-buttons">
                             <button type="button" onclick="prevStep()">Atrás</button>
-                            <button type="submit" class="btn-primary">Enviar ✓</button>
+                            <button type="button" onclick="submitForm()" class="btn-primary">Enviar ✓</button>
                         </div>
                         <div class="progress-dots">
                             <div class="progress-dot active"></div>
@@ -1088,6 +1088,46 @@
                 </div>
             `;
             document.getElementById('additionalNoGuests').insertAdjacentHTML('beforeend', guestHTML);
+        }
+
+        // Submit form with Web3Forms
+        function submitForm() {
+            const form = document.getElementById('rsvpForm');
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            // Deshabilitar botones durante el envío
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    // Mostrar página de agradecimiento
+                    document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                    currentStep = '5';
+                    document.querySelector('[data-step="5"]').classList.add('active');
+                    form.reset();
+                } else {
+                    console.log(response);
+                    alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
+                    buttons.forEach(btn => btn.disabled = false);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
+                buttons.forEach(btn => btn.disabled = false);
+            });
         }
 
         // Update active nav link on scroll
