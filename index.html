@@ -697,7 +697,16 @@
                 <h2 class="form-title">Confirmar</h2>
                 <p class="form-subtitle">Por favor, responded antes del 1 de Marzo, 2026.</p>
 
-                <form id="rsvpForm">
+                <!-- IFRAME OCULTO -->
+                <iframe name="hiddenFrame" style="display:none;"></iframe>
+
+                <!-- FORMULARIO NATIVO -->
+                <form id="rsvpForm" action="https://formsubmit.co/fernan_92@hotmail.com" method="POST" target="hiddenFrame">
+
+                    <!-- CONFIGURACIÓN FORMSUBMIT -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+
                     <div class="form-step active" data-step="1">
                         <h3 class="form-question">¿Podréis acompañarnos?</h3>
                         <div class="radio-group">
@@ -952,57 +961,20 @@
             document.getElementById('additionalNoGuests').insertAdjacentHTML('beforeend', html);
         }
 
-        // MANEJO DEL FORMULARIO
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // ENVÍO SIMPLIFICADO A IFRAME (SIN AJAX)
+        document.getElementById('rsvpForm').addEventListener('submit', function() {
+            // El formulario se envía nativamente al iframe oculto
+            // Nosotros solo mostramos el mensaje de agradecimiento
 
-            console.log('🚀 Formulario enviado - Iniciando proceso...');
+            console.log('📨 Enviando formulario al iframe oculto...');
 
-            const submitBtn = document.getElementById('submitBtn') || e.submitter;
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Enviando...';
-            }
-
-            const formData = new FormData(this);
-            const data = {};
-
-            for (let [key, value] of formData.entries()) {
-                if (value && value.trim() !== '') {
-                    data[key] = value;
-                    console.log(`${key}: ${value}`);
-                }
-            }
-
-            console.log('📦 Datos a enviar:', data);
-            console.log('🌐 Enviando a FormSubmit...');
-
-            fetch('https://formsubmit.co/ajax/fernan_92@hotmail.com', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                console.log('📡 Respuesta recibida:', response.status);
-                return response.json();
-            })
-            .then(result => {
-                console.log('✅ Éxito:', result);
+            // Retardo mínimo para asegurar que el submit ocurra
+            setTimeout(() => {
                 document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
                 currentStep = '5';
                 document.querySelector('[data-step="5"]').classList.add('active');
-            })
-            .catch(error => {
-                console.error('❌ Error:', error);
-                alert('Hubo un problema al enviar. Revisa la consola (F12) o contacta directamente.');
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Enviar ✓';
-                }
-            });
+                console.log('✅ Vista cambiada a Agradecimiento');
+            }, 200);
         });
     </script>
 </body>
