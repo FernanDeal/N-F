@@ -808,6 +808,20 @@
         }
 
         @media (max-width: 768px) {
+            /* HEADER MÓVIL - FONDO SÓLIDO COMPLETO */
+            header {
+                background-color: rgba(249, 249, 249, 0.95);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                padding: 15px 0;
+                box-shadow: 0 1px 0 rgba(229, 229, 229, 0.5);
+            }
+
+            header.scrolled {
+                background-color: rgba(249, 249, 249, 0.98);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            }
+
             nav {
                 padding: 0 30px;
             }
@@ -818,6 +832,12 @@
 
             .nav-links a {
                 font-size: 10px;
+            }
+
+            /* HERO MÓVIL - IMAGEN IMG_3955.png */
+            .hero {
+                background-image: url('images/IMG_3955.png');
+                background-attachment: scroll;
             }
 
             .hero h1 {
