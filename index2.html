@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda - Nuria y Fernando</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@300;400;500;600;700;300italic;400italic;500italic;600italic;700italic&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: #F9F9F9;
+            --text-main: #2D2D2D;
+            --text-light: #737373;
+            --accent: #C4A484;
+            --accent-hover: #b89878;
+            --line-color: #E5E5E5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--background);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* Header - MÁS TRANSPARENTE CON BLUR */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(249, 249, 249, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 15px 0;
+            box-shadow: 0 1px 0 rgba(229, 229, 229, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .logo {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 5px;
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 45px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* Sections - ESPACIO AUMENTADO A 30PX */
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 60px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section - OCUPA TODA LA PANTALLA */
+        .hero {
+            min-height: 100vh;
+            background-image: url('images/portada.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            text-align: center;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(249, 249, 249, 0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(249, 249, 249, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 60px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero .date {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            margin-bottom: 30px;
+        }
+
+        .countdown-number {
+            font-size: 48px;
+            color: var(--accent);
+            font-weight: 300;
+            display: block;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .hero-text {
+            font-size: 15px;
+            font-style: italic;
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            font-style: italic;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* Momentos Section */
+        .momentos {
+            background-color: var(--background);
+            flex-direction: column;
+            padding: 50px 40px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1255px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 133%;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .gallery-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.01);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(45, 45, 45, 0.6);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding: 40px;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: lightboxZoom 0.5s ease;
+        }
+
+        @keyframes lightboxZoom {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 75vh;
+            width: auto;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            margin-top: 30px;
+            max-width: 600px;
+            text-align: center;
+            color: #F9F9F9;
+            font-size: 16px;
+            font-style: italic;
+            line-height: 1.8;
+            padding: 0 20px;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+
+        .lightbox-close::before,
+        .lightbox-close::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 2px;
+            background-color: #F9F9F9;
+            transform-origin: center;
+        }
+
+        .lightbox-close::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .lightbox-close::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        /* El Gran Día Section */
+        .el-gran-dia {
+            background-color: var(--background);
+            flex-direction: column;
+            padding: 50px 60px;
+        }
+
+        .event-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            max-width: 1255px;
+            width: 100%;
+        }
+
+        .event-card {
+            position: relative;
+            text-align: center;
+            padding: 50px;
+            background: rgba(196, 164, 132, 0.04);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 
+                0 0 0 1px rgba(196, 164, 132, 0.08) inset,
+                0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Overlay para mejorar legibilidad del texto - EXPANDIDO 1PX */
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: rgba(249, 249, 249, 0.6);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 8px;
+            z-index: 0;
+            transition: background 0.3s ease;
+        }
+
+        .event-card:hover::before {
+            background: rgba(249, 249, 249, 0.8);
+        }
+
+        /* Todo el contenido de la tarjeta debe estar encima del overlay */
+        .event-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Imágenes de fondo específicas */
+        .event-card.iglesia {
+            background-image: url('images/Iglesia.png');
+        }
+
+        .event-card.normandie {
+            background-image: url('images/Normandie.png');
+        }
+
+        .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 0 0 1px rgba(196, 164, 132, 0.12) inset,
+                0 6px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .event-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .event-time {
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .event-location {
+            font-size: 16px;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .event-address {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .map-link {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-decoration: none;
+            text-transform: uppercase;
+            border-bottom: 1px solid transparent;
+            display: inline-block;
+            transition: border-color 0.3s ease, color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .map-link:hover {
+            border-bottom-color: var(--accent);
+            color: var(--accent-hover);
+        }
+
+        /* Confirmar Section */
+        .confirmar {
+            background-color: var(--background);
+            flex-direction: column;
+            padding: 50px 60px;
+        }
+
+        .form-container {
+            max-width: 650px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 4px;
+            border: 1px solid rgba(196, 164, 132, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-title {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .form-subtitle {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-question {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: center;
+            margin-bottom: 35px;
+            letter-spacing: 0.5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .form-message {
+            font-size: 15px;
+            font-style: italic;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Formulario en dos columnas */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid var(--line-color);
+            background-color: transparent;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15px;
+            color: var(--text-main);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            font-weight: 400;
+        }
+
+        select {
+            padding: 10px 10px 10px 0;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23737373' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right center;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-bottom-color: var(--accent);
+            background-color: rgba(196, 164, 132, 0.02);
+        }
+
+        ::placeholder {
+            color: #c0c0c0;
+            font-size: 13px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 35px;
+        }
+
+        .radio-option {
+            position: relative;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-option label {
+            font-size: 16px;
+            color: var(--text-light);
+            cursor: pointer;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            text-transform: none;
+            letter-spacing: 0;
+            font-weight: 400;
+        }
+
+        .radio-option input[type="radio"]:checked + label {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        /* Desplegable de autobús que aparece dinámicamente */
+        .bus-options {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(196, 164, 132, 0.06);
+            border: 1px solid rgba(196, 164, 132, 0.15);
+            border-radius: 4px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .bus-options.visible {
+            display: block;
+        }
+
+        .add-guest {
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--accent);
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: opacity 0.3s ease, color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .add-guest:hover {
+            opacity: 0.8;
+            color: var(--accent-hover);
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 45px;
+        }
+
+        button {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 10px 30px;
+            border: none;
+            background-color: transparent;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border-bottom: 1px solid transparent;
+        }
+
+        button:hover:not(:disabled) {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            color: var(--accent-hover);
+            border-bottom-color: var(--accent-hover);
+        }
+
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 35px;
+        }
+
+        .progress-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--line-color);
+            transition: background-color 0.4s ease, transform 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background-color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .thank-you {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .thank-you h2 {
+            font-size: 36px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .thank-you p {
+            font-size: 16px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--background);
+            padding: 30px 60px;
+            text-align: center;
+            border-top: 1px solid var(--line-color);
+        }
+
+        footer p {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero-content {
+                padding: 40px 55px;
+            }
+
+            .event-details {
+                gap: 45px;
+            }
+
+            .gallery-grid {
+                max-width: 1120px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 30px;
+            }
+
+            .nav-links {
+                gap: 25px;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-content {
+                padding: 35px 30px;
+            }
+
+            .countdown-number {
+                font-size: 40px;
+            }
+
+            .section {
+                padding: 30px 30px;
+            }
+
+            .momentos {
+                padding: 40px 30px;
+            }
+
+            .el-gran-dia {
+                padding: 40px 30px;
+            }
+
+            .confirmar {
+                padding: 40px 30px;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+                border-radius: 0;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .gallery-item {
+                border-radius: 0;
+            }
+
+            .event-details {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .event-card {
+                border-radius: 0;
+                padding: 40px;
+                min-height: 280px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            footer {
+                padding: 25px 30px;
+            }
+
+            .lightbox {
+                padding: 20px;
+            }
+
+            .lightbox-close {
+                top: 20px;
+                right: 20px;
+            }
+
+            .lightbox-caption {
+                font-size: 14px;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <div class="logo">N & F</div>
+            <ul class="nav-links">
+                <li><a href="#momentos" class="nav-link">Momentos</a></li>
+                <li><a href="#el-gran-dia" class="nav-link">El Gran Día</a></li>
+                <li><a href="#confirmar" class="nav-link active">Confirmar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="section hero visible">
+            <div class="hero-content">
+                <h1>Nuria &<br>Fernando</h1>
+                <p class="date">24 de Abril, 2026</p>
+
+                <div class="countdown">
+                    <span class="countdown-number" id="days">110</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+
+                <p class="hero-text">Un encuentro casual, una conversación que duró horas, y un amor para toda la vida. Nos encantaría que nos acompañarais en el día que sellaremos nuestra historia.</p>
+            </div>
+        </section>
+
+        <!-- Momentos Section -->
+        <section id="momentos" class="section momentos">
+            <div style="width: 100%;">
+                <div class="section-header">
+                    <h2 class="section-title">Momentos</h2>
+                    <p class="section-subtitle">Un pequeño vistazo a nuestra historia.</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="images/IMG_3955.png" alt="Nuria y Fernando" data-caption="Escribe aquí la descripción de esta imagen...">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200" alt="Paisaje árido" data-caption="Escribe aquí la descripción de esta imagen...">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200" alt="Castillo" data-caption="Escribe aquí la descripción de esta imagen...">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200" alt="Ola" data-caption="Escribe aquí la descripción de esta imagen...">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200" alt="Montañas" data-caption="Escribe aquí la descripción de esta imagen...">
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=1200" alt="Río" data-caption="Escribe aquí la descripción de esta imagen...">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- El Gran Día Section -->
+        <section id="el-gran-dia" class="section el-gran-dia">
+            <div>
+                <div class="section-header">
+                    <h2 class="section-title">El Gran Día</h2>
+                </div>
+
+                <div class="event-details">
+                    <div class="event-card iglesia">
+                        <h3 class="event-title">Ceremonia</h3>
+                        <p class="event-time">17:00</p>
+                        <p class="event-location">Iglesia de Nuestra Señora de la Anunciación</p>
+                        <p class="event-address">Torres de la Alameda, Madrid</p>
+                        <a href="https://maps.app.goo.gl/sDBCwMqbPArkWRpw9?g_st=ipc" target="_blank" class="map-link">Ver Mapa</a>
+                    </div>
+
+                    <div class="event-card normandie">
+                        <h3 class="event-title">Convite</h3>
+                        <p class="event-time">18:30</p>
+                        <p class="event-location">Restaurante Normandie Ondarreta</p>
+                        <p class="event-address">A-1, Km 36, 28710 El Molar, Madrid</p>
+                        <a href="https://maps.app.goo.gl/JbA7AxqHtL2kPmYCA?g_st=ipc" target="_blank" class="map-link">Ver Mapa</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Confirmar Section -->
+        <section id="confirmar" class="section confirmar">
+            <div class="form-container">
+                <h2 class="form-title">Confirmar</h2>
+                <p class="form-subtitle">Por favor, responded antes del 1 de Marzo, 2026.</p>
+
+                <form id="rsvpForm">
+                    <!-- Web3Forms Configuration -->
+                    <input type="hidden" name="access_key" value="6c75579f-7ae0-4ce8-b6ef-97e4f643fdb3">
+                    <input type="hidden" name="subject" value="Nueva respuesta - Boda Nuria y Fernando">
+                    <input type="hidden" name="from_name" value="Boda Nuria y Fernando">
+                    <input type="checkbox" name="botcheck" style="display: none;">
+
+                    <!-- Step 1: Asistencia PRIMERO -->
+                    <div class="form-step active" data-step="1">
+                        <h3 class="form-question">¿Podréis acompañarnos?</h3>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="asistir-si" name="asistencia" value="si" checked>
+                                <label for="asistir-si">Sí, con mucho gusto</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="asistir-no" name="asistencia" value="no">
+                                <label for="asistir-no">Lamentablemente, no</label>
+                            </div>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" style="visibility: hidden;">Atrás</button>
+                            <button type="button" onclick="handleAsistenciaStep()" class="btn-primary">Siguiente</button>
+                        </div>
+                        <div class="progress-dots">
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot"></div>
+                            <div class="progress-dot"></div>
+                            <div class="progress-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2A: NO PUEDEN VENIR - Nombres -->
+                    <div class="form-step" data-step="2a">
+                        <h3 class="form-question">Sentimos que no podáis venir.</h3>
+                        <p class="form-message">¿Podríais dejarnos vuestro nombre?</p>
+                        <div class="form-group">
+                            <label for="nombre_no_asiste">Nombre y Apellidos</label>
+                            <input type="text" id="nombre_no_asiste" name="nombre_no_asiste" placeholder="Tu nombre y apellidos">
+                        </div>
+                        <div id="additionalNoGuests"></div>
+                        <button type="button" class="add-guest" onclick="addNoGuest()">+ Añadir otra persona</button>
+                        <div class="form-buttons">
+                            <button type="button" onclick="backToAsistencia()">Atrás</button>
+                            <button type="button" onclick="submitForm()" class="btn-primary">Enviar ✓</button>
+                        </div>
+                        <div class="progress-dots">
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot"></div>
+                            <div class="progress-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2B: SÍ PUEDEN VENIR - Nombres y Alergias -->
+                    <div class="form-step" data-step="2b">
+                        <h3 class="form-question">¿Quiénes vendréis?</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre1">Nombre y Apellidos</label>
+                                <input type="text" id="nombre1" name="nombre1">
+                            </div>
+                            <div class="form-group">
+                                <label for="alergias1">Alergias</label>
+                                <input type="text" id="alergias1" name="alergias1" placeholder="Ninguna">
+                            </div>
+                        </div>
+                        <div id="additionalGuests"></div>
+                        <button type="button" class="add-guest" onclick="addGuest()">+ Añadir acompañante</button>
+                        <div class="form-buttons">
+                            <button type="button" onclick="backToAsistencia()">Atrás</button>
+                            <button type="button" onclick="nextStep()">Siguiente</button>
+                        </div>
+                        <div class="progress-dots">
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot"></div>
+                            <div class="progress-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Autobús CON DESPLEGABLE -->
+                    <div class="form-step" data-step="3">
+                        <h3 class="form-question">¿Necesitaréis autobús?</h3>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="autobus-si" name="autobus" value="si" onchange="toggleBusOptions(true)">
+                                <label for="autobus-si">Sí, por favor</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="autobus-no" name="autobus" value="no" checked onchange="toggleBusOptions(false)">
+                                <label for="autobus-no">No, gracias</label>
+                            </div>
+                        </div>
+
+                        <!-- Desplegable que aparece cuando seleccionan SÍ -->
+                        <div id="busOptions" class="bus-options">
+                            <div class="form-group">
+                                <label for="bus-parada">Selecciona tu parada</label>
+                                <select id="bus-parada" name="bus_parada">
+                                    <option value="">-- Selecciona una opción --</option>
+                                    <option value="opcion-a">Opción A</option>
+                                    <option value="opcion-b">Opción B</option>
+                                    <option value="opcion-c">Opción C</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" onclick="prevStep()">Atrás</button>
+                            <button type="button" onclick="nextStep()">Siguiente</button>
+                        </div>
+                        <div class="progress-dots">
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Canción -->
+                    <div class="form-step" data-step="4">
+                        <h3 class="form-question">¿Alguna canción que no pueda faltar?</h3>
+                        <div class="form-group">
+                            <input type="text" id="cancion" name="cancion" placeholder="Vuestra recomendación aquí">
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" onclick="prevStep()">Atrás</button>
+                            <button type="button" onclick="submitForm()" class="btn-primary">Enviar ✓</button>
+                        </div>
+                        <div class="progress-dots">
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot active"></div>
+                            <div class="progress-dot active"></div>
+                        </div>
+                    </div>
+
+                    <!-- Thank You -->
+                    <div class="form-step" data-step="5">
+                        <div class="thank-you">
+                            <h2>¡Gracias!</h2>
+                            <p>Hemos recibido tu respuesta. ¡Nos vemos en la boda!</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-close"></div>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img class="lightbox-image" id="lightbox-image" src="" alt="">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>N & F © 2026</p>
+    </footer>
+
+    <script>
+        let currentStep = '1';
+        let guestCount = 1;
+        let noGuestCount = 1;
+        let willAttend = true;
+
+        // Countdown
+        function updateCountdown() {
+            const weddingDate = new Date('2026-04-24T17:00:00');
+            const now = new Date();
+            const diff = weddingDate - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('days').textContent = days;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 86400000);
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Lightbox Functions
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+
+            lightboxImage.src = img.src;
+            lightboxImage.alt = img.alt;
+            lightboxCaption.textContent = img.getAttribute('data-caption');
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Toggle bus options dropdown
+        function toggleBusOptions(show) {
+            const busOptions = document.getElementById('busOptions');
+            if (show) {
+                busOptions.classList.add('visible');
+            } else {
+                busOptions.classList.remove('visible');
+            }
+        }
+
+        // Handle asistencia step
+        function handleAsistenciaStep() {
+            const asistencia = document.querySelector('input[name="asistencia"]:checked').value;
+            document.querySelector('[data-step="1"]').classList.remove('active');
+
+            if (asistencia === 'no') {
+                willAttend = false;
+                currentStep = '2a';
+                document.querySelector('[data-step="2a"]').classList.add('active');
+            } else {
+                willAttend = true;
+                currentStep = '2b';
+                document.querySelector('[data-step="2b"]').classList.add('active');
+            }
+        }
+
+        // Back to asistencia
+        function backToAsistencia() {
+            document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+            currentStep = '1';
+            document.querySelector('[data-step="1"]').classList.add('active');
+        }
+
+        // Next step
+        function nextStep() {
+            document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+            if (currentStep === '2b') currentStep = '3';
+            else if (currentStep === '3') currentStep = '4';
+            document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+        }
+
+        // Previous step
+        function prevStep() {
+            document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+            if (currentStep === '4') currentStep = '3';
+            else if (currentStep === '3') currentStep = '2b';
+            document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+        }
+
+        // Add guest (para los que SÍ asisten)
+        function addGuest() {
+            guestCount++;
+            const guestHTML = `
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre${guestCount}">Nombre y Apellidos</label>
+                        <input type="text" id="nombre${guestCount}" name="nombre${guestCount}">
+                    </div>
+                    <div class="form-group">
+                        <label for="alergias${guestCount}">Alergias</label>
+                        <input type="text" id="alergias${guestCount}" name="alergias${guestCount}" placeholder="Ninguna">
+                    </div>
+                </div>
+            `;
+            document.getElementById('additionalGuests').insertAdjacentHTML('beforeend', guestHTML);
+        }
+
+        // Add no guest (para los que NO asisten)
+        function addNoGuest() {
+            noGuestCount++;
+            const guestHTML = `
+                <div class="form-group">
+                    <label for="nombre_no_asiste${noGuestCount}">Nombre y Apellidos</label>
+                    <input type="text" id="nombre_no_asiste${noGuestCount}" name="nombre_no_asiste${noGuestCount}" placeholder="Nombre y apellidos">
+                </div>
+            `;
+            document.getElementById('additionalNoGuests').insertAdjacentHTML('beforeend', guestHTML);
+        }
+
+        // Submit form with Web3Forms
+        function submitForm() {
+            const form = document.getElementById('rsvpForm');
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            // Deshabilitar botones durante el envío
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    // Mostrar página de agradecimiento
+                    document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                    currentStep = '5';
+                    document.querySelector('[data-step="5"]').classList.add('active');
+                    form.reset();
+                } else {
+                    console.log(response);
+                    alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
+                    buttons.forEach(btn => btn.disabled = false);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
+                buttons.forEach(btn => btn.disabled = false);
+            });
+        }
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section[id]');
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
