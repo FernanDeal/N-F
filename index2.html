@@ -243,7 +243,7 @@
             padding: 50px 40px;
         }
 
-        /* GALERÍA CON CENTRADO AUTOMÁTICO DE IMÁGENES SOBRANTES */
+        /* GALERÍA CON CENTRADO AUTOMÁTICO - VERSIÓN MEJORADA */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -251,7 +251,6 @@
             max-width: 1255px;
             width: 100%;
             margin: 0 auto;
-            justify-items: center; /* ✅ Centra las imágenes sobrantes */
         }
 
         .gallery-item {
@@ -263,7 +262,17 @@
             border-radius: 4px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            width: 100%; /* Asegura que las imágenes ocupen todo el ancho de su celda */
+        }
+
+        /* Centrar la última imagen si queda sola (5 imágenes = última centrada) */
+        .gallery-item:nth-child(3n+1):nth-last-child(1) {
+            grid-column: 2 / 3; /* Columna del medio */
+        }
+
+        /* Centrar las 2 últimas imágenes si quedan 2 (4, 7, 10, etc imágenes) */
+        .gallery-item:nth-child(3n+2):nth-last-child(2),
+        .gallery-item:nth-child(3n+2):nth-last-child(2) ~ .gallery-item:nth-last-child(1) {
+            /* No hacer nada, quedan naturalmente centradas */
         }
 
         .gallery-item img {
@@ -886,6 +895,11 @@
 
             .gallery-item {
                 border-radius: 0;
+            }
+
+            /* Resetear el centrado en móvil */
+            .gallery-item:nth-child(3n+1):nth-last-child(1) {
+                grid-column: auto;
             }
 
             .event-details {
