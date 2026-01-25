@@ -969,25 +969,9 @@
                     <p class="section-subtitle">Un pequeño vistazo a nuestra historia.</p>
                 </div>
 
-                <div class="gallery-grid">
-                    <div class="gallery-item" onclick="openLightbox(this)">
-                        <img src="images/IMG_3955.png" alt="Nuria y Fernando" data-caption="Escribe aquí la descripción de esta imagen...">
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox(this)">
-                        <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200" alt="Paisaje árido" data-caption="Escribe aquí la descripción de esta imagen...">
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox(this)">
-                        <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200" alt="Castillo" data-caption="Escribe aquí la descripción de esta imagen...">
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox(this)">
-                        <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200" alt="Ola" data-caption="Escribe aquí la descripción de esta imagen...">
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox(this)">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200" alt="Montañas" data-caption="Escribe aquí la descripción de esta imagen...">
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox(this)">
-                        <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=1200" alt="Río" data-caption="Escribe aquí la descripción de esta imagen...">
-                    </div>
+                <!-- GALERÍA DINÁMICA - Se cargará desde gallery.json -->
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Las imágenes se cargarán dinámicamente aquí -->
                 </div>
             </div>
         </section>
@@ -1206,6 +1190,34 @@
         let guestCount = 1;
         let noGuestCount = 1;
         let willAttend = true;
+
+        // 🎉 CARGAR GALERÍA DINÁMICA DESDE JSON
+        async function loadGallery() {
+            try {
+                const response = await fetch('images/gallery.json');
+                const data = await response.json();
+                const galleryGrid = document.getElementById('galleryGrid');
+                
+                data.images.forEach(image => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.onclick = function() { openLightbox(this); };
+                    
+                    const img = document.createElement('img');
+                    img.src = `images/${image.file}`;
+                    img.alt = image.alt;
+                    img.setAttribute('data-caption', image.caption);
+                    
+                    galleryItem.appendChild(img);
+                    galleryGrid.appendChild(galleryItem);
+                });
+            } catch (error) {
+                console.error('Error al cargar la galería:', error);
+            }
+        }
+
+        // Cargar galería al iniciar
+        window.addEventListener('DOMContentLoaded', loadGallery);
 
         // Countdown
         function updateCountdown() {
