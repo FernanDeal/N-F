@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "file": "IMG_3955.png",
+      "alt": "Nuria y Fernando",
+      "caption": "Un momento especial de nuestra historia juntos."
+    },
+    {
+      "file": "Iglesia.png",
+      "alt": "Iglesia",
+      "caption": "La iglesia donde sellaremos nuestro amor."
+    },
+    {
+      "file": "Normandie.png",
+      "alt": "Restaurante",
+      "caption": "El lugar donde celebraremos este día inolvidable."
+    },
+    {
+      "file": "portada.png",
+      "alt": "Portada",
+      "caption": "Juntos hacia una nueva aventura."
+    }
+  ]
+}
