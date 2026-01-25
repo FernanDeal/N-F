@@ -273,6 +273,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            /* object-position se establece dinámicamente desde JavaScript */
             transition: transform 0.6s ease;
         }
 
@@ -1196,7 +1197,7 @@
         let noGuestCount = 1;
         let willAttend = true;
 
-        // 🎉 CARGAR GALERÍA DINÁMICA DESDE JSON
+        // 🎉 CARGAR GALERÍA DINÁMICA DESDE JSON CON OBJECT-POSITION
         async function loadGallery() {
             try {
                 const response = await fetch('images/gallery.json');
@@ -1212,6 +1213,13 @@
                     img.src = `images/${image.file}`;
                     img.alt = image.alt;
                     img.setAttribute('data-caption', image.caption);
+                    
+                    // 🎯 APLICAR OBJECT-POSITION DINÁMICAMENTE
+                    if (image.position) {
+                        img.style.objectPosition = image.position;
+                    } else {
+                        img.style.objectPosition = 'center'; // Por defecto
+                    }
                     
                     galleryItem.appendChild(img);
                     galleryGrid.appendChild(galleryItem);
