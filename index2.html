@@ -243,7 +243,7 @@
             padding: 50px 40px;
         }
 
-        /* GALERÍA CON CENTRADO AUTOMÁTICO - VERSIÓN MEJORADA */
+        /* GALERÍA CON CENTRADO AUTOMÁTICO */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -264,15 +264,18 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
-        /* Centrar la última imagen si queda sola (5 imágenes = última centrada) */
-        .gallery-item:nth-child(3n+1):nth-last-child(1) {
-            grid-column: 2 / 3; /* Columna del medio */
+        /* Centrar cuando queda UNA imagen suelta */
+        .gallery-item.center-single {
+            grid-column: 2 / 3;
         }
 
-        /* Centrar las 2 últimas imágenes si quedan 2 (4, 7, 10, etc imágenes) */
-        .gallery-item:nth-child(3n+2):nth-last-child(2),
-        .gallery-item:nth-child(3n+2):nth-last-child(2) ~ .gallery-item:nth-last-child(1) {
-            /* No hacer nada, quedan naturalmente centradas */
+        /* Centrar cuando quedan DOS imágenes sueltas */
+        .gallery-grid.two-remaining .gallery-item:nth-last-child(2) {
+            grid-column: 2 / 3;
+        }
+
+        .gallery-grid.two-remaining .gallery-item:nth-last-child(1) {
+            grid-column: 3 / 4;
         }
 
         .gallery-item img {
@@ -897,8 +900,13 @@
                 border-radius: 0;
             }
 
-            /* Resetear el centrado en móvil */
-            .gallery-item:nth-child(3n+1):nth-last-child(1) {
+            /* Resetear centrado en móvil */
+            .gallery-item.center-single {
+                grid-column: auto;
+            }
+
+            .gallery-grid.two-remaining .gallery-item:nth-last-child(2),
+            .gallery-grid.two-remaining .gallery-item:nth-last-child(1) {
                 grid-column: auto;
             }
 
@@ -1228,9 +1236,33 @@
                     galleryItem.appendChild(img);
                     galleryGrid.appendChild(galleryItem);
                 });
+
+                // ✨ CENTRAR IMÁGENES SOBRANTES
+                centerRemainingImages();
             } catch (error) {
                 console.error('Error al cargar la galería:', error);
             }
+        }
+
+        // Función para centrar imágenes sobrantes
+        function centerRemainingImages() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            const items = galleryGrid.querySelectorAll('.gallery-item');
+            const totalImages = items.length;
+            const remainder = totalImages % 3;
+
+            // Limpiar clases anteriores
+            galleryGrid.classList.remove('two-remaining');
+            items.forEach(item => item.classList.remove('center-single'));
+
+            if (remainder === 1) {
+                // Solo queda 1 imagen: centrarla en la columna del medio
+                items[totalImages - 1].classList.add('center-single');
+            } else if (remainder === 2) {
+                // Quedan 2 imágenes: centrarlas juntas
+                galleryGrid.classList.add('two-remaining');
+            }
+            // Si remainder === 0, no hacer nada (fila completa)
         }
 
         // Cargar galería al iniciar
