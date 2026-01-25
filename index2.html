@@ -879,10 +879,14 @@
                 border-radius: 0;
             }
 
-            /* GALERÍA MÓVIL - 2 COLUMNAS */
+            /* GALERÍA MÓVIL - 2 COLUMNAS CON GAP DE 15PX */
+            .gallery-grid {
+                gap: 15px;
+            }
+
             .gallery-item {
-                width: calc((100% - 15px) / 2);
-                padding-bottom: calc((100% - 15px) / 2 * 1.33);
+                width: calc(50% - 7.5px); /* 50% menos la mitad del gap */
+                padding-bottom: calc((50% - 7.5px) * 1.33); /* Aspect ratio 3:4 */
                 border-radius: 0;
             }
 
