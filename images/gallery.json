@@ -29,6 +29,16 @@
       "file": "portada.png",
       "alt": "Nuria y Fernando",
       "caption": "Hacia una nueva aventura juntos."
+    },
+    {
+      "file": "Iglesia.png",
+      "alt": "Iglesia de Nuestra Señora de la Anunciación",
+      "caption": "El lugar donde sellaremos nuestro amor."
+    },
+    {
+      "file": "Normandie.png",
+      "alt": "Restaurante Normandie Ondarreta",
+      "caption": "Donde celebraremos este día inolvidable."
     }
   ]
 }
